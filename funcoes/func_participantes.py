@@ -7,6 +7,7 @@ def gerar_codigo():
         codigo = f'PA{randint(1000,9999)}'
         if not any(participante['codigo'] == codigo for participante in participantes):
             return codigo
+        
 def cadastrar(nome, email, senha, preferencias):
     codigo = gerar_codigo()
     novo_part = {
@@ -16,8 +17,10 @@ def cadastrar(nome, email, senha, preferencias):
         'senha': senha,
         'preferencias': preferencias
     }
-    participantes.append(novo_part)
+    with open ('participantes.py', 'w') as file:
+        file.write(f'participantes = {participantes}\n{participantes.append(novo_part)}')
     print(f'Participante {nome} cadastrado com sucesso!\nCódigo de Participante: {codigo}')
+
 def login(email, senha):
     for participante in participantes:
         if participante['email'] == email:
@@ -27,9 +30,19 @@ def login(email, senha):
                 print('Senha incorreta.')
         else:
             print('Email não encontrado.')
-def inscricao_evento(eventos.nome, codigo):
-    
 
-def buscar_cod_participante(codigo):
+def inscricao_evento(nomeEvento, codigo):
+    for evento in eventos:
+        if evento['nome'] == nomeEvento:
+            for participante in participantes:
+                if participante['codigo'] == codigo:
+                    eventos['participantes'].append(participante)
+                    print(f'Você está inscrito no evento {nomeEvento}')
+            else:
+                print('Seu código não foi encontrado. Você está cadastrado?')
+        else:
+            print('Evento não encontrado.')
 
-def buscar_email_participante(email):
+# def buscar_cod_participante(codigo):
+
+# def buscar_email_participante(email):

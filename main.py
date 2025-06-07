@@ -1,5 +1,5 @@
 from funcoes.func_eventos import listar_eventos
-from funcoes.func_participantes import cadastrar,login,inscricao_evento,buscar_cod_participante,buscar_email_participante ##codigo nao funciona pois importei primeiro
+from funcoes.func_participantes import cadastrar,login,inscricao_evento#,buscar_cod_participante,buscar_email_participante ##codigo nao funciona pois importei primeiro
 
 def menu():
     while True:
@@ -15,24 +15,31 @@ def menu():
             senha = input('Insira a senha desejada: ')
             preferencias = input('Insira suas preferências (separadas por vírgula): ').split(',')
             cadastrar(nome, email, senha, [preferencia.strip() for preferencia in preferencias])
+
         elif opcao == '2':
             email = input('Insira o email cadastrado: ')
             senha = input('Insira a senha: ')
             login(email, senha)
+
         elif opcao == '3':
             print(f'Eventos disponiveis:\n{listar_eventos()}')
-            inscricao = input('Insira o nome do evento desejado: ')
+            nomeEvento = input('Insira o nome do evento desejado: ')
             codigo = input('Insira seu código de participante: ')
-            inscricao_evento()
+            inscricao_evento(nomeEvento,codigo)
+
         elif opcao == '4':
             listar_eventos()
+
         #elif opcao == '5': talvez colocar essa opcao no perfil de gerenciadores, clientes nao conseguiriam ver os participantes.
-        elif opcao == '6':
-            codigo = input('Insira seu código de participante:')
-            buscar_cod_participante(codigo)
-        elif opcao == '7':
-            email = input('Insira seu email de participante:')
-            buscar_email_participante(email)
+
+        # elif opcao == '6':
+        #     codigo = input('Insira seu código de participante:')
+        #     buscar_cod_participante(codigo)
+
+        # elif opcao == '7':
+        #     email = input('Insira seu email de participante:')
+        #     buscar_email_participante(email)
+        
         elif opcao == '8':
             print('Até outra hora!')
             break
