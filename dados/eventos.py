@@ -1,14 +1,1 @@
-eventos = [
-    {
-        "nome": "Workshop de Python",
-        "data": "2025-06-15",
-        "tema": "Programação",
-        "participantes": ["P001", "P002"]
-    },
-    {
-        "nome": "Hackathon de IA",
-        "data": "2025-07-01",
-        "tema": "Inteligência Artificial",
-        "participantes": ["P003"]
-    }
-]
+evento = [{'nome': 'Workshop de Python', 'data': '2025-06-15', 'tema': 'Programacao', 'participantes': ['P001', 'P002', 'PA3498', 'PA8479']}, {'nome': 'Hackathon de IA', 'data': '2025-07-01', 'tema': 'Inteligencia Artificial', 'participantes': ['P003']}]

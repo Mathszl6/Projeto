@@ -1,4 +1,4 @@
-from funcoes.func_eventos import listar_eventos
+from funcoes.func_eventos import eventos_disponiveis, listar_eventos_programados
 from funcoes.func_participantes import cadastrar,login,inscricao_evento#,buscar_cod_participante,buscar_email_participante ##codigo nao funciona pois importei primeiro
 
 def menu():
@@ -22,13 +22,13 @@ def menu():
             login(email, senha)
 
         elif opcao == '3':
-            print(f'Eventos disponiveis:\n{listar_eventos()}')
+            eventos_disponiveis()
             nomeEvento = input('Insira o nome do evento desejado: ')
             codigo = input('Insira seu código de participante: ')
             inscricao_evento(nomeEvento,codigo)
 
         elif opcao == '4':
-            listar_eventos()
+            listar_eventos_programados()
 
         #elif opcao == '5': talvez colocar essa opcao no perfil de gerenciadores, clientes nao conseguiriam ver os participantes.
 
