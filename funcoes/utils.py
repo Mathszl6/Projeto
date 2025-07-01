@@ -65,12 +65,13 @@ def gerar_estatisticas():
         for codigo in evento.get('participantes', []):
             contagem[codigo]+=1
 
-    print('Temas mais frequentes:')
+    print('\nTemas mais frequentes:\n')
     for tema, qtd in temas.most_common(3):
         if qtd == 1:
             print(f'{tema.capitalize()}: aparece em {qtd} evento.')
         else:
             print(f'{tema.capitalize()}: aparece em {qtd} eventos.')
+    print('\nParticipantes mais ativos:\n')        
     for codigo, qtd in contagem.most_common(3):
         if qtd == 1:
             print(f'O participante com código: {codigo}, participou em {qtd} evento.')

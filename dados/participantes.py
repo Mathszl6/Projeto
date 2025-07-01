@@ -1,1 +1,1 @@
-participantes = [{'codigo': 'PA5211', 'nome': 'matheus', 'email': 'matheus123@gmail.com', 'senha': '1234', 'preferencias': ['IA']}, {'codigo': 'PA2375', 'nome': 'rafaela', 'email': 'rafaela@gmail.com', 'senha': '123', 'preferencias': ['IA', 'Javascript']}, {'codigo': 'PA6254', 'nome': 'pedro', 'email': 'pedro@gmail.com', 'senha': '123', 'preferencias': ['IA']}]
+participantes = [{'codigo': 'PA1108', 'nome': 'matheus', 'email': 'matheus@gmail.com', 'senha': '1234', 'preferencias': ['IA', 'Python']}]

@@ -21,7 +21,7 @@ def cadastrar(nome, email, senha, preferencias):
     dados.append(novo_part)
     with open ('dados/participantes.py', 'w') as file:
         file.write(f'participantes = {dados}')
-    print(f'Participante {nome} cadastrado com sucesso!\nCódigo de Participante: {codigo}')
+    print(f'\nParticipante {nome} cadastrado com sucesso!\nCódigo de Participante: {codigo}\n')
     
 
 
@@ -30,12 +30,12 @@ def login(email, senha):
     for participante in pessoas:
         if participante['email'] == email:
             if participante['senha'] == senha:
-                print(f'Seja bem vindo ao menu do usuário, {participante['nome']}!')
+                print(f'\n\nSeja bem vindo ao menu do usuário, {participante['nome']}!')
                 return participante
             else:
-                print('Senha incorreta.')
+                print('\nSenha incorreta.')
                 return
-    print('Email não encontrado.')
+    print('\nEmail não encontrado.')
 
 def inscricao_evento(nome_evento, codigo):
     participantes = ler()
@@ -43,18 +43,18 @@ def inscricao_evento(nome_evento, codigo):
     for event in evento:
         if event['nome'] == nome_evento:
             if codigo in event['participantes']:
-                print(f'Você já está inscrito no evento {nome_evento}')
+                print(f'\nVocê já está inscrito no evento {nome_evento}.')
                 return
             if any(participante.get('codigo') == codigo for participante in participantes):
                 event['participantes'].append(codigo)
                 with open ('dados/eventos.py', 'w') as file:
                     file.write(f'evento = {evento}')
-                print(f'Você se inscreveu no evento {nome_evento}.')
+                print(f'\nVocê se inscreveu no evento {nome_evento}!')
                 return
             else:
-                print('Seu código não foi encontrado. Você está cadastrado?')
+                print('\nSeu código não foi encontrado. Você está cadastrado?')
                 return
-    print('Evento não encontrado.')
+    print('\nEvento não encontrado.')
 
 
 
@@ -62,16 +62,18 @@ def buscar_cod_participante(codigo):
     participantes = ler()
     for participante in participantes:
         if participante['codigo'] == codigo:
-            print(f'Código:{participante['codigo']} | Nome: {participante["nome"]} | Email: {participante["email"]} | Preferências: {participante["preferencias"]}')
+            print(f'\n\nForam encontradas as seguintes informações do participante com código: {participante['codigo']}')
+            print(f'\nCódigo:{participante['codigo']} | Nome: {participante["nome"]} | Email: {participante["email"]} | Preferências: {participante["preferencias"]}\n')
             return
-    print('Código não encontrado.')
+    print('\nCódigo não encontrado.\n')
     return
 
 def buscar_email_participante(email):
     participantes = ler()
     for participante in participantes:
         if participante['email'] == email:
-            print(f'Código:{participante['codigo']} | Nome: {participante["nome"]} | Email: {participante["email"]} | Preferências: {participante["preferencias"]}')
+            print(f'\n\nForam encontradas as seguintes informações do participante com email: {participante['email']}')
+            print(f'\nCódigo:{participante['codigo']} | Nome: {participante["nome"]} | Email: {participante["email"]} | Preferências: {participante["preferencias"]}\n')
             return
-    print('Código não encontrado.')
+    print('\nEmail não encontrado.\n')
     return

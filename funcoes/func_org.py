@@ -5,64 +5,68 @@ from funcoes.func_participantes import buscar_cod_participante,buscar_email_part
 
 def menu_org():
     while True:
-        print("Bem vindo ao menu de Organizador do Gerenciamento de Eventos!")
+        print("\n\nBem vindo ao menu de Organizador do Gerenciamento de Eventos!")
         print('Por favor selecione uma das opções a seguir:')
-        print(f'Opção 1 - Cadastrar-se.\nOpção 2 - Fazer login.\nOpção 3 - Sair.')
+        print(f'\nOpção 1 - Cadastrar-se.\nOpção 2 - Fazer login.\nOpção 3 - Sair.')
 
-        opcao_menu_org = input('Insira a opção desejada: ')
+        opcao_menu_org = input('\nInsira a opção desejada: ')
 
         if opcao_menu_org == '1':
+            print('\nOpção de cadastrar organizador selecionada!\n\nPor favor,')
             nome = input('Insira o seu nome: ')
             email = input('Insira o seu email: ')
             senha = input('Insira a senha desejada: ')
             cadastrar_org(nome, email, senha)
 
         elif opcao_menu_org == '2':
+            print('\nOpção de fazer login selecionada!\n\nPor favor,')
             codigo_org = input('Insira o código de organizador cadastrado: ')
             senha = input('Insira a senha: ')
             organizador_logado = login_org(codigo_org, senha)
             if organizador_logado:
                 while True:
-                    print('Selecione uma das opções a seguir:')
-                    print(f'Opção 1 - Listar Eventos Programados.\nOpção 2 - Listar participantes por evento.\nOpção 3 - Verificar informações de participante.\nOpção 4 - Cadastrar evento.\nOpção 5 - Gerar estatisticas.\nOpção 6 - Voltar ao menu de Organizador.')
+                    print('\nSelecione uma das opções a seguir:')
+                    print(f'\nOpção 1 - Listar Eventos Programados.\nOpção 2 - Listar participantes por evento.\nOpção 3 - Verificar informações de participante.\nOpção 4 - Cadastrar evento.\nOpção 5 - Gerar estatisticas.\nOpção 6 - Voltar ao menu de Organizador.')
 
-                    opcao_org = input('Por favor insira a opção desejada: ')
+                    opcao_org = input('\nPor favor insira a opção desejada: ')
                     if opcao_org == '1':
                         listar_eventos_programados()
 
                     elif opcao_org == '2':
                         evento = ler_eventos()
                         for event in evento:
-                            print(f'A quantidade de participantes do evento {event["nome"]} é: {len(event['participantes'])}.')
+                            print(f'\nA quantidade de participantes do evento {event["nome"]} é: {len(event['participantes'])}.')
 
                     elif opcao_org == '3':
-                        print('Deseja verificar informações com código de participante ou email?')
-                        print(f'Opção 1 - Busca por código de participante.\nOpção 2 - Busca por email de participante.')
-                        escolha = input('Insira a opção desejada: ')
+                        print('\nDeseja verificar informações com código de participante ou email?')
+                        print(f'\nOpção 1 - Busca por código de participante.\nOpção 2 - Busca por email de participante.')
+                        escolha = input('\nInsira a opção desejada: ')
             
                         if escolha == '1':
+                            print('\nVerificar informações via código de participante selecionado!\n\nPor favor,')
                             codigo = input('Insira o código de participante: ')
                             buscar_cod_participante(codigo)
-                            continuar = input('Deseja escolher outra opção? (s/n): ')
-                        if continuar.lower() == 's':
-                            menu_org()
-                        else:
-                            print('Até mais!')
-                            break
-                        if escolha == '2':
+                            continuar = input('\nDeseja escolher outra opção? (s/n): ')
+                            if continuar.lower() != 's':
+                                print('Até mais!\n')
+                                break
+                        elif escolha == '2':
+                            print('\nVerificar informações via email de participante selecionado!\n\nPor favor,')
                             email = input('Insira o email: ')
                             buscar_email_participante(email)
-                            continuar = input('Deseja escolher outra opção? (s/n): ')
-                            if continuar.lower() == 's':
-                                menu_org()
-                            else:
-                                print('Até mais!')
+                            continuar = input('\nDeseja escolher outra opção? (s/n): ')
+                            if continuar.lower() != 's':
+                                print('Até mais!\n')
                                 break
                         else:
-                            print('Insira uma opção válida.')
-                            continuar = input('Deseja escolher outra opção? (s/n): ')
+                            print('\nInsira uma opção válida.')
+                            continuar = input('\nDeseja escolher outra opção? (s/n): ')
+                            if continuar.lower() == 's':
+                                print('Até mais!\n')
+                                break
 
                     elif opcao_org == '4':
+                        print('\nOpção de cadastro de evento selecionada!\n\nPor favor,')
                         nome = input('Insira o nome do evento: ')
                         data = input('Insira a data do evento: ')
                         tema = input('Insira o tema do evento: ')
@@ -72,14 +76,14 @@ def menu_org():
                         gerar_estatisticas()
                     
                     elif opcao_org == '6':
-                        print('Voltando..')
+                        print('Voltando..\n')
                         break
 
         elif opcao_menu_org == '3':
-            print('Saindo..')
+            print('Saindo..\n')
             break
         else:
-            print('Por favor insira uma opção válida.')
+            print('\nPor favor insira uma opção válida.')
 
 
 
@@ -95,14 +99,14 @@ def cadastrar_org(nome, email, senha):
     orgs = ler_org()
     for organizador in orgs:
         if organizador['email'] == novo_org['email']:
-            print('Email já cadastrado em outro organizador.')
+            print('\nEmail já cadastrado em outro organizador.')
             return False
         
     dados.append(novo_org)
     with open ('dados/organizador.py', 'w') as file:
         file.write(f'organizadores = {dados}')
     
-    print(f'Organizador {nome} cadastrado com sucesso!\nCódigo de Organizador: {codigo_org}')
+    print(f'\nOrganizador {nome} cadastrado com sucesso!\nCódigo de Organizador: {codigo_org}')
     return True
 
 def login_org(codigo_org,senha):
@@ -110,9 +114,9 @@ def login_org(codigo_org,senha):
     for organizador in orgs:
         if organizador['codigo'] == codigo_org:
             if organizador['senha'] == senha:
-                print(f'Seja bem vindo {organizador['nome']}.')
+                print(f'\nSeja bem vindo {organizador['nome']}.')
                 return organizador
             else:
-                print('Senha incorreta.')
+                print('\nSenha incorreta.')
                 return
-    print('Código não encontrado.')
+    print('\nCódigo não encontrado.')
