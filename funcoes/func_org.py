@@ -1,4 +1,4 @@
-from funcoes.utils import gerar_codigoORG, ler_org, ler_eventos,gerar_estatisticas
+from utils import gerar_codigoORG,ler,gerar_estatisticas
 from dados.organizador import organizadores as dados_organizador
 from funcoes.func_eventos import listar_eventos_programados,cadastrar_evento
 from funcoes.func_participantes import buscar_cod_participante,buscar_email_participante
@@ -33,7 +33,7 @@ def menu_org():
                         listar_eventos_programados()
 
                     elif opcao_org == '2':
-                        evento = ler_eventos()
+                        evento = ler('dados/eventos.py')
                         for event in evento:
                             print(f'\nA quantidade de participantes do evento {event["nome"]} é: {len(event['participantes'])}.')
 
@@ -96,7 +96,7 @@ def cadastrar_org(nome, email, senha):
         'senha': senha
     }
     dados = dados_organizador.copy()
-    orgs = ler_org()
+    orgs = ler('dados/organizador.py')
     for organizador in orgs:
         if organizador['email'] == novo_org['email']:
             print('\nEmail já cadastrado em outro organizador.')
@@ -110,7 +110,7 @@ def cadastrar_org(nome, email, senha):
     return True
 
 def login_org(codigo_org,senha):
-    orgs = ler_org()
+    orgs = ler('dados/organizador.py')
     for organizador in orgs:
         if organizador['codigo'] == codigo_org:
             if organizador['senha'] == senha:
