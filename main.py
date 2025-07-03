@@ -27,7 +27,7 @@ def menu():
             if usuario_logado:
                 while True:
                     print('\nPor favor selecione uma das opções a seguir:')
-                    print(f'\nOpção 1 - Cadastrar-se em evento.\nOpção 2 - Listar Eventos Programados.\nOpcão 3 - Atualizar dados\nOpcão 4 - Buscar evento por tema ou data\nOpcão 5 - Excluir conta\nOpção 6 - Sair.')
+                    print(f'\nOpção 1 - Cadastrar-se em evento.\nOpção 2 - Listar Eventos Programados.\nOpcão 3 - Atualizar dados.\nOpcão 4 - Buscar evento por tema ou data.\nOpcão 5 - Excluir conta.\nOpção 6 - Sair.')
 
                     opcao_user = input('\nInsira somente o número da opção desejada: ')
 
@@ -57,9 +57,7 @@ def menu():
                             tema_user = input('Digite o tema do evento: ')
                             buscar_evento_por_tema(tema=tema_user)
                             continuar_filtro = input('\nDeseja escolher outra opção? (s/n): ')
-                            if continuar_filtro.lower() == 's':
-                                menu()
-                            else:
+                            if continuar_filtro.lower() != 's':
                                 print('Até mais!\n')
                                 break    
                         elif opcao_filtro == '2':
