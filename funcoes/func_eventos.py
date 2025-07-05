@@ -7,9 +7,10 @@ def eventos_disponiveis():
         print(f'Nome: {event['nome']} | Data: {event['data']} | Tema : {event['tema']}\n')
 
 def listar_eventos_programados():
+    eventos = ler('dados/eventos.py')
     print('\nLista dos Eventos Programados: \n')
-    for event in dados_evento:
-        print(f'Nome: {event['nome']} | Data: {event["data"]} | Tema: {event['tema']}')
+    for evento in eventos:
+        print(f'Nome: {evento['nome']} | Data: {evento["data"]} | Tema: {evento['tema']}')
 
 def cadastrar_evento(nome,data,tema):
     novo_evento = {
@@ -69,3 +70,24 @@ def atualizar_dados_evento(nome, novo_tema=None, nova_data=None):
         print("\nDados atualizados com sucesso!")
     else:
         print("\nEvento não encontrado. Você inseriu o nome certo?")
+        
+def buscar_evento_por_tema_org(tema):
+    eventos = ler('dados/eventos.py')
+    eventos_temas_iguais = [evento for evento in eventos if evento['tema']  == tema] #lista para adicionar os eventos que foram encontrados desse tema
+    if eventos_temas_iguais:
+        print('\n\nEventos encontrados:')
+        for tema_encontrado in eventos_temas_iguais:
+            print(f"\nNome: {tema_encontrado["nome"]} | Data: {tema_encontrado["data"]} | Tema: {tema_encontrado["tema"]} | Participantes: {tema_encontrado["participantes"]}")
+    else:
+        print('Nenhum evento encontrado!')
+
+    
+def buscar_evento_por_data_org(data):
+    eventos = ler('dados/eventos.py')
+    eventos_datas_iguais = [evento for evento in eventos if evento['data'] == data]
+    if eventos_datas_iguais:
+        print('\nEventos encontrados:')
+        for data_encontrada in eventos_datas_iguais:
+            print(f"\nNome: {data_encontrada["nome"]} | Data: {data_encontrada["data"]} | Tema: {data_encontrada["tema"]} | Participantes: {data_encontrado["participantes"]}")
+    else:
+        print('Nenhum evento encontrado!')
