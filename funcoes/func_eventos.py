@@ -50,3 +50,22 @@ def buscar_evento_por_data(data):
             print(f"\nNome: {data_encontrada["nome"]} | Data: {data_encontrada["data"]} | Tema: {data_encontrada["tema"]}")
     else:
         print('Nenhum evento encontrado!')
+
+def atualizar_dados_evento(nome, novo_tema=None, nova_data=None):
+    eventos = ler('dados/eventos.py')
+    encontrado = False
+
+    for evento in eventos:
+        if evento['nome'] == nome:
+            if novo_tema:
+                evento['tema'] = novo_tema
+            if nova_data:
+                evento['data'] = nova_data
+            encontrado = True
+            break
+    if encontrado:
+        with open ('dados/eventos.py', 'w') as file:
+            file.write(f"eventos = {eventos}")
+        print("\nDados atualizados com sucesso!")
+    else:
+        print("\nEvento não encontrado. Você inseriu o nome certo?")
