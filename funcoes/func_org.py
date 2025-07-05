@@ -1,7 +1,7 @@
 from utils import gerar_codigoORG,ler,gerar_estatisticas
 from dados.organizador import organizadores as dados_organizador
-from funcoes.func_eventos import listar_eventos_programados,cadastrar_evento,atualizar_dados_evento
-from funcoes.func_participantes import buscar_cod_participante,buscar_email_participante
+from funcoes.func_eventos import listar_eventos_programados,cadastrar_evento,atualizar_dados_evento,buscar_evento_por_data_org,buscar_evento_por_tema_org
+from funcoes.func_participantes import buscar_cod_participante,buscar_email_participante,remover_participante_e_atualizar_eventos
 
 def menu_org():
     while True:
@@ -26,7 +26,7 @@ def menu_org():
             if organizador_logado:
                 while True:
                     print('\nSelecione uma das opções a seguir:')
-                    print(f'\nOpção 1 - Listar Eventos Programados.\nOpção 2 - Listar participantes por evento.\nOpção 3 - Verificar informações de participante.\nOpção 4 - Cadastrar evento.\nOpção 5 - Gerar estatisticas.\nOpção 6 - Atualizar dados de evento.\nOpção 7 - Voltar ao Menu de Organizador.')
+                    print(f'\nOpção 1 - Listar Eventos Programados.\nOpção 2 - Listar participantes por evento.\nOpção 3 - Verificar informações de participante.\nOpção 4 - Cadastrar evento.\nOpção 5 - Gerar estatisticas.\nOpção 6 - Atualizar dados de evento.\nOpção 7 - Filtrar eventos por data ou tema.\nOpção 8 - Excluir cadastro de participante.\nOpção 9 - Excluir conta de organizador.\nOpção 10 - Sair.')
 
                     opcao_org = input('\nPor favor insira a opção desejada: ')
                     if opcao_org == '1':
@@ -81,8 +81,52 @@ def menu_org():
                         novo_tema = input('Digite o novo tema: ')
                         nova_data = input('Digite a nova data: ')
                         atualizar_dados_evento(nome=nome_evento, novo_tema=novo_tema, nova_data=nova_data)
-                        
+                     
                     elif opcao_org == '7':
+                        print('\nOpção de filtrar eventos por tema ou data selecionada!')
+                        print('\nDeseja filtrar os eventos por tema ou por data?')
+                        print('\nOpção 1 - Filtrar por tema de evento.\nOpção 2 - Filtrar por data de evento.')
+                        opcao_filtro_org = input('\nInsira somente o número da opção desejada: ')
+                        if opcao_filtro_org == '1':
+                            print('\nOpção de filtrar eventos por tema selecionada!\n\nPor favor,')
+                            tema_user = input('Digite o tema do evento: ')
+                            buscar_evento_por_tema_org(tema=tema_user)
+                            continuar_filtro = input('\nDeseja escolher outra opção? (s/n): ')
+                            if continuar_filtro.lower() != 's':
+                                print('Até mais!\n')
+                                break    
+                        elif opcao_filtro_org == '2':
+                            print('\nOpção de filtrar eventos por data selecionada!\n\nPor favor,')       
+                            data = input('Digite a data: ')
+                            buscar_evento_por_data_org(data=data)
+                            continuar_filtro = input('\nDeseja escolher outra opção? (s/n): ')
+                            if continuar_filtro.lower() != 's':
+                                print('Até mais!\n')
+                                break
+                        else:
+                            print('\nInsira uma opção válida.')
+                            continuar_filtro = input('\nDeseja escolher outra opção? (s/n): ')
+                            if continuar_filtro.lower() != 's':
+                                print('Até mais!\n')
+                                break
+                     
+                    elif opcao_org == '8':
+                        print('\nOpção de excluir conta de participante selecionada!')  
+                        cod_participante = input('\nDigite o código do participante: ')
+                        resposta_user = input('\nVocê tem certeza? (s/n)')
+                        if resposta_user == 's':                
+                            remover_participante_e_atualizar_eventos(codigo_participante=cod_participante) 
+                            break
+                            
+                    elif opcao_org == '9':
+                        print('\nOpção de excluir conta de organizador selecionada!')  
+                        cod_organizador = input('\nDigite o código do organizador: ')
+                        resposta_user = input('\nVocê tem certeza? (s/n)')
+                        if resposta_user == 's':                
+                            excluir_conta(codigo_org=cod_organizador) 
+                            break
+                     
+                    elif opcao_org == '10':
                         print('Voltando..\n')
                         break
 
@@ -127,3 +171,15 @@ def login_org(codigo_org,senha):
                 print('\nSenha incorreta.')
                 return
     print('\nCódigo não encontrado.')
+    
+def excluir_conta(codigo_org):
+    organizadores = ler('dados/organizador.py')
+    nova_lista = [organizador for organizador in organizadores if organizador['codigo'] != codigo_org]
+
+    if len(nova_lista) == len(organizadores):
+        print("\nOrganizador não encontrado.")
+        return
+    else:
+        with open ('dados/organizador.py', 'w') as file:
+            file.write(f"organizadores = {nova_lista}")
+        print(f"\nOrganizador com o código: {codigo_org} foi removido com sucesso.")
