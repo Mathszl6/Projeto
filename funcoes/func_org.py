@@ -77,12 +77,11 @@ def menu_org():
 
                     elif opcao_org == '6':
                         print('\nOpção de atualizar dados selecionada!')
-                        nome_evento = input('Digite o código de participante: ')
+                        nome_evento = input('Digite o nome do evento: ')
                         novo_tema = input('Digite o novo tema: ')
                         nova_data = input('Digite a nova data: ')
-                        atualizar_dados_evento(nome=nome_evento, novo_tema= novo_tema, nova_data=nova_data)
+                        atualizar_dados_evento(nome=nome_evento, novo_tema=novo_tema, nova_data=nova_data)
                         
-                    
                     elif opcao_org == '7':
                         print('Voltando..\n')
                         break
